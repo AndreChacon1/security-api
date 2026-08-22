@@ -16,14 +16,12 @@ Endpoints:
     POST /api/data    – protected, requires x-api-key
 """
 
+import os
+
 from fastapi import FastAPI, Header, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 
-# ---------------------------------------------------------------------------
-# The "secret" API key — in a real system this would live in a secret
-# manager, but here it is hardcoded for demonstration purposes.
-# ---------------------------------------------------------------------------
-API_KEY = "my-super-secret-api-key-12345"
+API_KEY = os.environ.get("API_KEY", "my-super-secret-api-key-12345")
 
 app = FastAPI(
     title="Security API – x-api-key Anti-Pattern Demo",
